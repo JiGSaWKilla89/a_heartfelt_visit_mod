@@ -54,7 +54,7 @@ screen replays():
     $ tooltip = GetTooltip()
     style_prefix "replays"
     tag menu
-    use game_menu("Replays", scroll="viewport"):
+    use game_menu(_("Replays"), scroll="viewport"):
 
         vpgrid:
             cols 3

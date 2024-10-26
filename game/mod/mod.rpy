@@ -22,7 +22,7 @@ init -500 python:
 
 init python:
     if JGSLoadable("music_room") and JGSLoadable("music_room_screen"):
-        shortcuts = """
+        shortcuts = _("""
             {size=75}{color=FB4301}JiG{/color}{color=#000}SaW{/color} Mod Shortcuts{/size}
 
             Toggle Textbox Shortcut: {color=FB4301}T{/color}
@@ -38,9 +38,9 @@ init python:
             Toggle Quick Menu Visibility: {color=FB4301}Q{/color}
             Toggle Quick Menu Position: {color=FB4301}Shift+Q{/color}
             Adjust Textbox Visibility Keypad {color=FB4301}+/-{/color}
-            """
+            """)
     else:
-        shortcuts = """
+        shortcuts = _("""
             {size=75}{color=FB4301}JiG{/color}{color=#000}SaW{/color} Mod Shortcuts{/size}
 
             Toggle Textbox Shortcut: {color=FB4301}T{/color}
@@ -55,11 +55,11 @@ init python:
             Toggle Quick Menu Visibility: {color=FB4301}Q{/color}
             Toggle Quick Menu Position: {color=FB4301}Shift+Q{/color}
             Adjust Textbox Visibility Keypad {color=FB4301}+/-{/color}
-            """
+            """)
 
-    wt_choice_tooltip = """Each Choice marked with either Good Choice/Bad Choice is
+    wt_choice_tooltip = _("""Each Choice marked with either Good Choice/Bad Choice is
         just a recommendation from me.
-        You play the game the way you want."""
+        You play the game the way you want.""")
 
 init -5 python:
     import time
@@ -317,9 +317,9 @@ init -5 python:
             # Restart interaction if needed
             renpy.restart_interaction()
             if main_menu and not self.bypass:
-                renpy.notify("Changed Effect to: %s"%persistent._slow_effect_title)
+                renpy.notify(_("Changed Effect to: %s"%persistent._slow_effect_title))
             if not main_menu:
-                renpy.notify("Changed Effect to: %s"%persistent._slow_effect_title)
+                renpy.notify(_("Changed Effect to: %s"%persistent._slow_effect_title))
 
             #return persistent._slow_effect_title
 
@@ -359,9 +359,9 @@ init -5 python:
             # Restart interaction if needed
             renpy.restart_interaction()
             if main_menu and not self.bypass:
-                renpy.notify("Changed Always Effect to: %s"%persistent._always_effect_title)
+                renpy.notify(_("Changed Always Effect to: %s"%persistent._always_effect_title))
             if not main_menu:
-                renpy.notify("Changed Always Effect to: %s"%persistent._always_effect_title)
+                renpy.notify(_("Changed Always Effect to: %s"%persistent._always_effect_title))
                 
 
             #return persistent._always_effect_title
@@ -481,6 +481,8 @@ init -5 python:
                 return str(renpy.get_widget(self.screen_name,self.input_id).content)
 
     def toggle_callstack():
+        if not jgs_develop:
+            return
         if main_menu:
             return
         renpy.run(ToggleScreen("callstack", transition=dissolve))
@@ -518,19 +520,19 @@ init -5 python:
         return "{}".format(join_param).join(fix)
 
     def _adjust_dialogue(direction="+"):
-        txt = "Textbox Visibility"
+        txt = _("Textbox Visibility")
         if direction == "+":
             if persistent._textbox_alpha <= 0.99 :
                 persistent._textbox_alpha += 0.01
             else:
                 persistent._textbox_alpha = 1.0
-                txt = "Textbox Is Completely Visible"
+                txt = _("Textbox Is Completely Visible")
         elif direction == "-":
             if persistent._textbox_alpha > 0.01:
                 persistent._textbox_alpha -= 0.01
             else:
                 persistent._textbox_alpha = 0.0
-                txt = "Textbox Is Completely Invisible"
+                txt = _("Textbox Is Completely Invisible")
         renpy.notify("%s: %s"%(txt, TextBoxAlpha()))
 
     def add_notify_message(msg=None):
@@ -573,11 +575,11 @@ init -5 python:
         if persistent._notify_custom:
             persistent._notify_custom = False
             config.notify = renpy.display_notify
-            renpy.notify("Custom Notifications Off")
+            renpy.notify(_("Custom Notifications Off"))
         else:
             persistent._notify_custom = True
             config.notify = add_notify_message
-            renpy.notify("Custom Notifications On")
+            renpy.notify(_("Custom Notifications On"))
         
         renpy.restart_interaction()
 

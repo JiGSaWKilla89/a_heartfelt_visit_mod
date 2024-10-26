@@ -486,8 +486,3 @@ screen color_picker(color, field, align=(1.0.0.0)):
             bar_invert True
             thumb Transform('mod/images/hue_picker.png',
                 matrixcolor=ColorizeMatrix(getattr(persistent, field), "#FFFFFF"), xsize=gui.bar_size*2, ysize=gui.bar_size)
-
-
-        
-
-        

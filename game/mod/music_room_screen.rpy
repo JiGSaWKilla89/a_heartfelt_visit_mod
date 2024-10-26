@@ -67,7 +67,7 @@ screen musicroom():
                     selected "back_button_selected"
                     insensitive "back_button_insensitive"
                     action mr.Previous(),SetLocalVariable("timer_active", True)
-                    tooltip "Previous Track\n[mr.previous_track]"
+                    tooltip _("Previous Track\n[mr.previous_track]")
                 imagebutton:
                     style "imagebutton_sounds"
                     idle MP_IMG("rewind")
@@ -75,7 +75,7 @@ screen musicroom():
                     selected "rewind_button_selected"
                     insensitive "rewind_button_insensitive"
                     action mr.Rewind()
-                    tooltip "Rewind\n[mr.current_track]"
+                    tooltip _("Rewind\n[mr.current_track]")
                 if renpy.music.is_playing(channel='music'):
                     imagebutton:
                         style "imagebutton_sounds"
@@ -84,7 +84,7 @@ screen musicroom():
                         selected ("play_button_selected" if mr.get_pause() else "pause_button_selected")
                         insensitive ("play_button_insensitive" if mr.get_pause() else "pause_button_insensitive")
                         action mr.TogglePause()
-                        tooltip "Pause/Play\n[mr.current_track]"
+                        tooltip _("Pause/Play\n[mr.current_track]")
                 else:
                     imagebutton:
                         style "imagebutton_sounds"
@@ -93,7 +93,7 @@ screen musicroom():
                         selected "play_button_selected"
                         insensitive "play_button_insensitive"
                         action mr.Play()
-                        tooltip "Play\n[mr.current_track]"
+                        tooltip _("Play\n[mr.current_track]")
                 imagebutton:
                     style "imagebutton_sounds"
                     idle MP_IMG("stop")
@@ -101,7 +101,7 @@ screen musicroom():
                     selected "stop_button_selected"
                     insensitive "stop_button_insensitive"
                     action mr.Stop()
-                    tooltip "Stop\n[mr.current_track]"
+                    tooltip _("Stop\n[mr.current_track]")
                 imagebutton:
                     style "imagebutton_sounds"
                     idle MP_IMG("fast_forward")
@@ -109,7 +109,7 @@ screen musicroom():
                     selected "fast_forward_button_selected"
                     insensitive "fast_forward_button_insensitive"
                     action mr.Forward()
-                    tooltip "Fast Forward\n[mr.current_track]"
+                    tooltip _("Fast Forward\n[mr.current_track]")
                 imagebutton:
                     style "imagebutton_sounds"
                     idle MP_IMG("next")
@@ -117,7 +117,7 @@ screen musicroom():
                     selected "next_button_selected"
                     insensitive "next_button_insensitive"
                     action mr.Next(),SetLocalVariable("timer_active", True)
-                    tooltip "Next Track\n[mr.next_track]"
+                    tooltip _("Next Track\n[mr.next_track]")
                 imagebutton:
                     style "imagebutton_sounds"
                     idle (MP_IMG("repeat_once") if mr.single_track else MP_IMG("repeat"))
@@ -126,7 +126,7 @@ screen musicroom():
                     selected ("repeat_once_button_selected" if mr.single_track else "repeat_button_selected")
                     insensitive ("repeat_once_button_insensitive" if mr.single_track else "repeat_button_insensitive")
                     action mr.ToggleSingleTrack()
-                    tooltip "Repeat\n[mr.current_track]"
+                    tooltip _("Repeat\n[mr.current_track]")
                 imagebutton:
                     style "imagebutton_sounds"
                     idle (MP_IMG("shuffle") if mr.shuffle else MP_IMG("shuffle_off"))
@@ -135,7 +135,7 @@ screen musicroom():
                     selected ("shuffle_button_selected" if mr.shuffle else "shuffle_off_button_selected")
                     insensitive ("shuffle_button_insensitive" if mr.shuffle else "shuffle_off_button_insensitive")
                     action mr.ToggleShuffle()
-                    tooltip "Shuffle Playlist"
+                    tooltip _("Shuffle Playlist")
                 if len(mr.unlocked_playlist()) < sum(len(titles) for titles in music_tracks.values()):
                     imagebutton:
                         style "imagebutton_sounds"
@@ -145,13 +145,13 @@ screen musicroom():
                         insensitive ("unlocked_button_insensitive" if show_locked else "locked_button_insensitive")
                         action ToggleLocalVariable("show_locked")
                         sensitive len(mr.unlocked_playlist()) < sum(len(titles) for titles in music_tracks.values())
-                        tooltip "Show Locked\n[mr.current_track]"
+                        tooltip _("Show Locked\n[mr.current_track]")
                 imagebutton:
                     style "imagebutton_sounds"
                     idle MP_IMG("settings")
                     hover MP_IMG("settings", "hover")
                     action Show("color_picker_mr", transition=dissolve)
-                    tooltip "Settings"
+                    tooltip _("Settings")
                 imagebutton:
                     style "imagebutton_sounds"
                     idle (MP_IMG("silent",size=gui.button_size_mute) if get_mute(channel="music") == 0.0\
@@ -165,7 +165,7 @@ screen musicroom():
                     selected "mute_player_selected"
                     insensitive "mute_player_insensitive"
                     action MutePlayer()
-                    tooltip "Mute Music"
+                    tooltip _("Mute Music")
                 hbox:
                     spacing 5
                     xalign 1.0
@@ -174,7 +174,7 @@ screen musicroom():
                         if not timer_active:
                             hovered barvalue.hovered
                             unhovered barvalue.unhovered
-                            tooltip "Progress\n[mr.current_track]"
+                            tooltip _("Progress\n[mr.current_track]")
                         base_bar MP_BAR("idle")
                         hover_base_bar MP_BAR("hover")
                         thumb MP_THUMB("hover")
@@ -187,7 +187,7 @@ screen musicroom():
                     label _("Music Volume: %s"%VolumeDisplay('music')) xalign 0.0 text_color MP_TEXT("idle")
                 vbox:
                     xalign 1.0
-                    bar value Preference("music volume") xalign 1.0 tooltip "Volume\n{}".format(VolumeDisplay('music')):
+                    bar value Preference("music volume") xalign 1.0 tooltip _("Volume\n{}".format(VolumeDisplay('music'))):
                         hovered SetLocalVariable("mouse_active", True)
                         unhovered SetLocalVariable("mouse_active", False)
                         base_bar MP_BAR("idle")
@@ -281,7 +281,7 @@ screen musicroom():
         key "mousedown_4" action SlowVolUp("music","_fast_vol_music","music")
         key "mousedown_5" action SlowVolDown("music","_fast_vol_music","music")
 
-    text "Now Playing: [mr.current_track]" align (0.99, 0.05)
+    text _("Now Playing: [mr.current_track]") align (0.99, 0.05)
 
 screen color_picker_mr():
     modal True
@@ -289,7 +289,7 @@ screen color_picker_mr():
     default option = ""
     default field = ""
     default state = "idle"
-    use game_menu("Music Player Settings"):
+    use game_menu(_("Music Player Settings")):
         vbox:
             spacing 20
             hbox:
@@ -388,7 +388,7 @@ screen color_picker_mr():
             hbox:#Good Choice
                 spacing 15
                 vbox:
-                    textbutton "Set {} Color Buttons".format(state.title()):
+                    textbutton _("Set {} Color Buttons".format(state.title())):
                         
                         action If(option == "_music_icon_{}_color".format(state), 
                             true=[SetScreenVariable("activate", False), SetScreenVariable("option", ""), SetScreenVariable("field", "")], 
@@ -396,7 +396,7 @@ screen color_picker_mr():
                         text_color getattr(persistent,"_music_icon_{}_color".format(state))
                         text_hover_color adjust_brightness(getattr(persistent,"_music_icon_{}_color".format(state)), -50)
                 vbox:
-                    textbutton "Reset":
+                    textbutton _("Reset"):
                         action SetField(persistent, "_music_icon_{}_color".format(state), getattr(persistent,"_music_icon_{}_color_default".format(state)))
                         sensitive getattr(persistent,"_music_icon_{}_color".format(state)) != getattr(persistent,"_music_icon_{}_color_default".format(state))
             
@@ -424,12 +424,12 @@ screen music_overlay():
             align (1.0,0.12)
             padding (20,10,20,10)
             vbox:
-                text "Now Playing" size gui.bar_size+10
-                text "[mr.current_track]" size gui.bar_size
-                text "Looping {}".format(mr.get_track() in renpy.music.get_loop()) size gui.bar_size-5
+                text _("Now Playing") size gui.bar_size+10
+                text _("[mr.current_track]") size gui.bar_size
+                text _("Looping {}".format(mr.get_track() in renpy.music.get_loop())) size gui.bar_size-5
                 hbox:
                     spacing 30
-                    text "Progress" size gui.text_size-10
+                    text _("Progress") size gui.text_size-10
                     hbox:
                         xalign 1.0
                         yoffset -2
