@@ -1,6 +1,6 @@
-I have created a Multi-Mod with walkthrough for 24 Lustful Hours by [Secret Arcade](https://www.patreon.com/SecretArcade)
+I have created a Multi-Mod with walkthrough for A Heartfelt Visit by [Secret Arcade](https://www.patreon.com/SecretArcade)
 
-![screenshot](Screenshots/01_main_menu.jpg)
+![screenshot](screenshots/01_main_menu.jpg)
 
 Mod Features:
   1. Walkthough with Suggestions. Not Really Required but just my best suggestions
